@@ -1,0 +1,33 @@
+package caterpillow.Module.HUD;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import net.minecraft.client.gui.FontRenderer;
+
+public class FPS extends Module {
+
+	FontRenderer fr = mc.fontRendererObj;
+	static int fontHeight = fr.FONT_HEIGHT;
+
+	public FPS() {
+		super("FPS", Keyboard.KEY_NONE, Category.HUD, null, fontHeight + 5, 50);
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+			fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 2, -1);
+		}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 2, -1);
+	}
+
+}

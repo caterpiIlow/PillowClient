@@ -1,0 +1,73 @@
+package caterpillow.Module.Movement;
+
+import java.util.ArrayList;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.EventUpdate;
+import caterpillow.tutorial.Tutorial;
+import caterpillow.utils.MoveUtils;
+import de.Hero.settings.Setting;
+import net.minecraft.client.Minecraft;
+
+public class Speed extends Module {
+
+	public Speed() {
+		super("Speed", Keyboard.KEY_Z, Category.MOVEMENT);
+	}
+
+	public Minecraft mc = Minecraft.getMinecraft();
+
+	public void onEnable() {
+		super.onEnable();
+	}
+
+	public void onDisable() {
+		super.onDisable();
+	}
+
+	@EventTarget
+	public void onUpdate(EventUpdate event) {
+
+		if (Tutorial.instance.settingsManager.getSettingByName("Mode").getValString().equalsIgnoreCase("Hypixel")) {
+			this.setDisplayName("Speed – §7Hypixel");
+			MoveUtils.strafe();
+			if (mc.thePlayer.onGround && MoveUtils.isMoving()) {
+				mc.thePlayer.motionX *= 1F;
+				mc.thePlayer.motionZ *= 1F;
+				mc.thePlayer.jump();
+			}
+			if (!(mc.thePlayer.moveStrafing == 0) && mc.thePlayer.moveForward == 0) {
+				MoveUtils.strafe(0.23F);
+			} else if (!(mc.thePlayer.moveStrafing == 0) && !(mc.thePlayer.moveForward == 0)) {
+				MoveUtils.strafe(0.225F);
+			}
+
+		} else if (Tutorial.instance.settingsManager.getSettingByName("Mode").getValString()
+				.equalsIgnoreCase("Normal")) {
+			this.setDisplayName("Speed – §7Normal");
+			if (mc.thePlayer.onGround && MoveUtils.isMoving()) {
+				mc.thePlayer.motionX *= 2F;
+				mc.thePlayer.motionZ *= 2F;
+				mc.thePlayer.jump();
+			}
+			if (!(mc.thePlayer.moveStrafing == 0) && mc.thePlayer.moveForward == 0) {
+				MoveUtils.strafe(0.5F);
+			} else if (!(mc.thePlayer.moveStrafing == 0) && !(mc.thePlayer.moveForward == 0)) {
+				MoveUtils.strafe(0.5F);
+			}
+		}
+	}
+
+	@Override
+	public void setup() {
+		ArrayList<String> options = new ArrayList<>();
+		options.add("Normal");
+		options.add("Hypixel");
+		Tutorial.instance.settingsManager.rSetting(new Setting("Mode", this, "Normal", options));
+
+	}
+}

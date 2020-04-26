@@ -1,0 +1,67 @@
+package caterpillow.Client;
+
+import org.lwjgl.opengl.Display;
+
+import caterpillow.GUI.SplashProgress;
+import caterpillow.Module.ModuleManager;
+import caterpillow.event.EventManager;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.EventKey;
+import de.Hero.clickgui.ClickGUI;
+import de.Hero.settings.SettingsManager;
+
+public class Client {
+	public String name = "Pillow", version = "1", creator = "caterpillow";
+
+	// public static HUD hud = new HUD();
+
+	public static Client instance = new Client();
+
+	public SettingsManager settingsManager;
+
+	public EventManager eventManager;
+	public static ModuleManager moduleManager;
+	public ClickGUI clickGui;
+
+	public void startClient() {
+
+		SplashProgress.setProgress(8, "Initialising Client");
+
+		settingsManager = new SettingsManager();
+
+		moduleManager = new ModuleManager();
+		
+		notificationManager = new NotificationManager();
+
+		eventManager = new EventManager();
+
+		clickGui = new ClickGUI();
+
+		System.out.println("[" + name + "] Starting client, v" + version + " created by " + creator);
+		Display.setTitle(name + " v" + version);
+
+		eventManager.register(this);
+	}
+
+	public void stopClient() {
+		eventManager.unregister(this);
+	}
+
+	public static boolean killAuraAttacking() {
+		return moduleManager.getModulesByName("Killaura").isToggled()
+				&& Client.instance.settingsManager.getSettingByName("Silent Aim").getValBoolean()
+				&& moduleManager.getModulesByName("KillAura")
+						.getClosest(Client.instance.settingsManager.getSettingByName("Range").getValDouble()) != null
+				&& moduleManager.getModulesByName("Scaffold").isToggled()
+				&& moduleManager.getModulesByName("Scaffold").isBlockUnder();
+
+	}
+
+	@EventTarget
+	public void onKey(EventKey event) {
+
+		moduleManager.getModules().stream().filter(module -> module.getKey() == event.getKey())
+				.forEach(module -> module.toggle());
+	}
+
+}

@@ -1,0 +1,152 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import java.awt.Color;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.settings.KeyBinding;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, null, );
+	}
+
+	public static enum KeyStrokesMode {
+
+		WASD(Key.W, Key.A, Key.S, Key.D), WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
+		WASD_SPRINT(Key.W, Key.A, Key.S, Key.D,
+				new Key("Sprint", Minecraft.getMinecraft().gameSettings.keyBindSprint, 1, 41, 58, 18)),
+		WASD_SPRINT_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB,
+				new Key("Sprint", Minecraft.getMinecraft().gameSettings.keyBindSprint, 1, 61, 58, 18));
+
+		private final Key[] keys;
+		private int width = 0;
+		private int height = 0;
+
+		private KeyStrokesMode(Key... keysIn) {
+			this.keys = keysIn;
+
+			for (Key key : keys) {
+				this.width = Math.max(this.width, key.getX() + key.width);
+				this.height = Math.max(this.height, key.getY() + key.height);
+
+			}
+		}
+
+		public Key[] getKeys() {
+			return keys;
+		}
+
+	}
+
+	private static class Key {
+
+		private static final Key W = new Key("W", Minecraft.getMinecraft().gameSettings.keyBindForward, 21, 1, 18, 18);
+		private static final Key A = new Key("A", Minecraft.getMinecraft().gameSettings.keyBindLeft, 1, 21, 18, 18);
+		private static final Key S = new Key("S", Minecraft.getMinecraft().gameSettings.keyBindBack, 21, 21, 18, 18);
+		private static final Key D = new Key("D", Minecraft.getMinecraft().gameSettings.keyBindRight, 41, 21, 18, 18);
+
+		private static final Key LMB = new Key("LMB", Minecraft.getMinecraft().gameSettings.keyBindAttack, 1, 41, 28,
+				18);
+		private static final Key RMB = new Key("RMB", Minecraft.getMinecraft().gameSettings.keyBindUseItem, 31, 41, 28,
+				18);
+
+		private final String name;
+
+		private final KeyBinding key;
+		private final int x;
+		private final int y;
+		private final int width;
+		private final int height;
+
+		public Key(String name, KeyBinding key, int x, int y, int width, int height) {
+
+			this.name = name;
+			this.key = key;
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public KeyBinding getKey() {
+			return key;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		public int getWidth() {
+			return width;
+		}
+
+		public int getHeight() {
+			return height;
+		}
+
+		public boolean isDown() {
+			return Minecraft.getMinecraft().gameSettings.isKeyDown(key);
+		}
+
+	}
+
+	private ScreenPosition pos;
+
+	private KeyStrokesMode mode = KeyStrokesMode.WASD_MOUSE;
+
+	@Override
+	public int getWidth() {
+		return mode.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return mode.getHeight();
+	}
+
+	@EventTarget
+	public void onRender2D(Event2D event) {
+		GL11.glPushMatrix();
+
+		boolean blend = GL11.glIsEnabled(GL11.GL_BLEND);
+
+		GL11.glDisable(GL11.GL_BLEND);
+
+		for (Key key : mode.getKeys()) {
+			int textWidth = fr.getStringWidth(key.getName());
+
+			Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY(),
+					key.getWidth() + key.getX() + pos.getAbsoluteX(), key.getHeight() + key.getY() + pos.getAbsoluteY(),
+					key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+			fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+					pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+					key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+		}
+
+		if (blend) {
+			GL11.glEnable(GL11.GL_BLEND);
+		}
+
+		GL11.glPopMatrix();
+	}
+
+}

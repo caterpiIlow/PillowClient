@@ -1,0 +1,72 @@
+---- Minecraft Crash Report ----
+// I blame Dinnerbone.
+
+Time: 26/04/20 10:24 PM
+Description: Initializing game
+
+java.lang.NoClassDefFoundError: org/newdawn/slick/UnicodeFont
+	at caterpillow.utils.UnicodeFontRenderer.<init>(UnicodeFontRenderer.java:110)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:40)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:35)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:31)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:27)
+	at caterpillow.GUI.SplashProgress.drawProgress(SplashProgress.java:92)
+	at caterpillow.GUI.SplashProgress.drawSplash(SplashProgress.java:72)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:487)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:409)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+Caused by: java.lang.ClassNotFoundException: org.newdawn.slick.UnicodeFont
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 11 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at caterpillow.utils.UnicodeFontRenderer.<init>(UnicodeFontRenderer.java:110)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:40)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:35)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:31)
+	at caterpillow.utils.UnicodeFontRenderer.getFontOnPC(UnicodeFontRenderer.java:27)
+	at caterpillow.GUI.SplashProgress.drawProgress(SplashProgress.java:92)
+	at caterpillow.GUI.SplashProgress.drawSplash(SplashProgress.java:72)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:487)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:409)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Mac OS X (x86_64) version 10.14.3
+	Java Version: 1.8.0_181, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 766067624 bytes (730 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: mcp
+	LWJGL: 2.9.2
+	OpenGL: Intel(R) Iris(TM) Plus Graphics 655 GL version 2.1 INTEL-12.4.7, Intel Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: The Caterpack
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i5-8259U CPU @ 2.30GHz

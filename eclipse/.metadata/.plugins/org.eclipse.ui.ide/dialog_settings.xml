@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
+		<item key="ShowStatusLine" value="true"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History&gt;&#x0A;&lt;historyRootNode&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/gui/GuiMainMenu.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/renderer/vertex/DefaultVertexFormats.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/multiplayer/PlayerControllerMP.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/network/NetworkManager.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/gui/Gui.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/audio/SoundList.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/jars/libraries/com/paulscode/soundsystem/20120107/soundsystem-20120107.jar&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/audio/SoundRegistry.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/renderer/EntityRenderer.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/Minecraft.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/gui/GuiIngame.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/renderer/InventoryEffectRenderer.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/potion/Potion.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/caterpillow/Module/Module.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/network/handshake/client/C00Handshake.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/network/play/client/C00PacketKeepAlive.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/Client/src/net/minecraft/client/entity/EntityPlayerSP.java&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;/historyRootNode&gt;&#x0A;&lt;/History&gt;"/>
+		<item key="ShowDerived" value="false"/>
+		<item key="FilterByLocation" value="false"/>
+		<item key="WorkingSet" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;"/>
+		<section name="DialogBoundsSettings">
+			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_WIDTH" value="600"/>
+			<item key="DIALOG_X_ORIGIN" value="414"/>
+			<item key="DIALOG_Y_ORIGIN" value="117"/>
+			<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+		</section>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="418"/>
+		<item key="DIALOG_Y_ORIGIN" value="22"/>
+		<item key="DIALOG_WIDTH" value="593"/>
+		<item key="DIALOG_HEIGHT" value="528"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+</section>

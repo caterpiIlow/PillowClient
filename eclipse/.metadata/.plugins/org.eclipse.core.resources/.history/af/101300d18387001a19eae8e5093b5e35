@@ -1,0 +1,20 @@
+package caterpillow.Module.Specific;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+
+public class MouseSwap extends Module {
+	public MouseSwap() {
+		super("MouseSwap", Keyboard.KEY_K, Category.MISC);
+	}
+
+	@Override
+	public void onEnable() {
+		mc.gameSettings.keyBindAttack = Mouse.button(1);
+		toggle();
+	}
+
+}

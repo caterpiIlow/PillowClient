@@ -1,0 +1,122 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import java.awt.Color;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import de.Hero.settings.Setting;
+import net.minecraft.client.gui.Gui;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, ScreenPosition.fromAbsolute(0, 0), 60, 60);
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("WASD", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Mouse", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Jump", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Sneak", this, true));
+
+		pos = ScreenPosition.fromTopRight(50, 0);
+		width = 50;
+		height = fr.FONT_HEIGHT + 5;
+
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+
+			int count = 0;
+
+			if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+
+				drawKey(Key.W);
+				drawKey(Key.A);
+				drawKey(Key.S);
+				drawKey(Key.D);
+				count += 2;
+			}
+			if (Client.instance.settingsManager.getSettingByName("Mouse").getValBoolean()) {
+
+				drawKey(Key.RMB, count);
+				drawKey(Key.LMB, count);
+				count += 1;
+			}
+			if (Client.instance.settingsManager.getSettingByName("Jump").getValBoolean()) {
+
+				drawKey(Key.JUMP, count);
+				count += 1;
+			}
+			if (Client.instance.settingsManager.getSettingByName("Sneak").getValBoolean()) {
+
+				drawKey(Key.SNEAK, count);
+				count += 1;
+			}
+
+		}
+	}
+
+	private void drawKey(Key key, int count) {
+		int textWidth = fr.getStringWidth(key.getName());
+		Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY() + count * 20,
+				key.getWidth() + key.getX() + pos.getAbsoluteX(),
+				key.getHeight() + key.getY() + pos.getAbsoluteY() + count * 20,
+				key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+		fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+				pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + count * 20,
+				key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+	}
+
+	private void drawKey(Key key) {
+		int textWidth = fr.getStringWidth(key.getName());
+		Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY(),
+				key.getWidth() + key.getX() + pos.getAbsoluteX(), key.getHeight() + key.getY() + pos.getAbsoluteY(),
+				key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+		fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+				pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+				key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		int count = 0;
+
+		if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+
+			drawKey(Key.W);
+			drawKey(Key.A);
+			drawKey(Key.S);
+			drawKey(Key.D);
+			count += 2;
+		}
+		if (Client.instance.settingsManager.getSettingByName("Mouse").getValBoolean()) {
+
+			drawKey(Key.RMB, count);
+			drawKey(Key.LMB, count);
+			count += 1;
+		}
+		if (Client.instance.settingsManager.getSettingByName("Jump").getValBoolean()) {
+
+			drawKey(Key.JUMP, count);
+			count += 1;
+		}
+		if (Client.instance.settingsManager.getSettingByName("Sneak").getValBoolean()) {
+
+			drawKey(Key.SNEAK, count);
+			count += 1;
+		}
+
+		this.setHeight(count * 20);
+	}
+
+}

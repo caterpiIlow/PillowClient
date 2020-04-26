@@ -1,0 +1,91 @@
+package caterpillow.Module.Render;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.EventPacket;
+import de.Hero.settings.Setting;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemPotion;
+import net.minecraft.network.play.client.C0APacketAnimation;
+
+public class OldAnimations extends Module {
+
+	public OldAnimations() {
+		super("OldAnimations", Keyboard.KEY_NONE, Category.RENDER);
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("Sharpness", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Multiplier", this, 1, 1, 10, "SharpMultiplier", true));
+		Client.instance.settingsManager.rSetting(new Setting("Criticals", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Multiplier", this, 1, 1, 10, "CritMultiplier", true));
+	}
+
+	@EventTarget
+	public void onUpdate(EventMotionUpdate e) {
+		if (this.isEnabled()) {
+			if (mc.gameSettings.keyBindAttack.pressed) {
+				if (mc.thePlayer.isEating() && mc.gameSettings.keyBindUseItem.pressed
+						&& mc.thePlayer.getHeldItem().getItem() != null && this.getBool("Food")) {
+					if (mc.thePlayer.getHeldItem().getItem() instanceof ItemFood) {
+						if (this.isMode("SwingPacket")) {
+							mc.thePlayer.swingItem();
+						} else if (this.isMode("SendClick")) {
+							if (mc.gameSettings.keyBindAttack.pressed == true) {
+								mc.clickMouse();
+								timer.reset();
+							} else {
+								timer.reset();
+							}
+						}
+					}
+				}
+				if (mc.thePlayer.isEating() && mc.gameSettings.keyBindUseItem.pressed
+						&& mc.thePlayer.getHeldItem().getItem() != null && this.getBool("Potions")) {
+					if (mc.thePlayer.getHeldItem().getItem() instanceof ItemPotion) {
+						if (this.isMode("SwingPacket")) {
+							mc.thePlayer.swingItem();
+						} else if (this.isMode("SendClick")) {
+							if (mc.gameSettings.keyBindAttack.pressed == true) {
+								mc.clickMouse();
+								timer.reset();
+							} else {
+								timer.reset();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@EventTarget
+	public void onUpdate(EventPacket e) {
+		if (this.isEnabled()) {
+			if (mc.gameSettings.keyBindAttack.pressed) {
+				if (mc.thePlayer.isEating() && mc.gameSettings.keyBindUseItem.pressed
+						&& mc.thePlayer.getHeldItem().getItem() instanceof ItemFood
+						&& mc.thePlayer.getHeldItem().getItem() != null && this.getBool("Food")
+						&& this.getBool("Serverside") == false) {
+					if (e.getPacket() instanceof C0APacketAnimation) {
+						e.setSkip(true);
+					}
+				}
+				if (mc.thePlayer.isEating() && mc.gameSettings.keyBindUseItem.pressed
+						&& mc.thePlayer.getHeldItem().getItem() instanceof ItemPotion
+						&& mc.thePlayer.getHeldItem().getItem() != null && this.getBool("Potions")
+						&& this.getBool("Serverside") == false) {
+					if (e.getPacket() instanceof C0APacketAnimation) {
+						e.setSkip(true);
+					}
+				}
+			}
+		}
+	}
+
+}

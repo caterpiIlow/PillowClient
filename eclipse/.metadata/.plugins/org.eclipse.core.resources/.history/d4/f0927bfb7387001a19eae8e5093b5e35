@@ -1,0 +1,39 @@
+package caterpillow.Notification;
+
+import java.util.HashMap;
+
+public class NotificationManager {
+	private static HashMap<Notification, Integer> pendingNotifications = new HashMap<Notification, Integer>();
+	private static Notification currentNotification = null;
+
+	public static void show(Notification notification) {
+		System.out.println("Added notification to queue");
+		pendingNotifications.put(notification, pendingNotifications.size());
+
+	}
+
+	public static void update() {
+		if (currentNotification != null && !currentNotification.isShown()) {
+			System.out.println("current notification not shown; setting current notification to null");
+
+			currentNotification = null;
+		}
+
+		if (currentNotification == null && !pendingNotifications.isEmpty()) {
+			currentNotification = pendingNotifications.currentNotification = pendingNotifications.remove(0);
+
+			currentNotification.show();
+			System.out.println("Shwoing notification");
+
+		}
+
+	}
+
+	public static void notificationUpdate() {
+//		System.out.println("update");
+		update();
+
+		if (currentNotification != null)
+			currentNotification.render();
+	}
+}

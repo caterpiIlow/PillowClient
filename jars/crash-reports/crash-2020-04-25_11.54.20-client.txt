@@ -1,0 +1,80 @@
+---- Minecraft Crash Report ----
+// Ooh. Shiny.
+
+Time: 25/04/20 11:54 AM
+Description: Rendering screen
+
+java.lang.NullPointerException: Rendering screen
+	at caterpillow.Module.HUD.KeyStrokes.KeyStrokes.renderDummy(KeyStrokes.java:119)
+	at caterpillow.Module.HUD.HUDConfigScreen.drawScreen(HUDConfigScreen.java:69)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1171)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1041)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:421)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at caterpillow.Module.HUD.KeyStrokes.KeyStrokes.renderDummy(KeyStrokes.java:119)
+	at caterpillow.Module.HUD.HUDConfigScreen.drawScreen(HUDConfigScreen.java:69)
+
+-- Screen render details --
+Details:
+	Screen name: caterpillow.Module.HUD.HUDConfigScreen
+	Mouse location: Scaled: (274, 132). Absolute: (549, 215)
+	Screen size: Scaled: (427, 240). Absolute: (854, 480). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player838'/24219, l='MpServer', x=367.80, y=77.00, z=213.87]]
+	Chunk stats: MultiplayerChunkCache: 625, 625
+	Level seed: 0
+	Level generator: ID 02 - largeBiomes, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 584.00,64.00,166.00 - World: (584,64,166), Chunk: (at 8,4,6 in 36,10; contains blocks 576,0,160 to 591,255,175), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 514675 game time, 109647 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: true), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 91 total; [EntityXPOrb['Experience Orb'/24320, l='MpServer', x=339.13, y=72.00, z=248.88], EntityXPOrb['Experience Orb'/24321, l='MpServer', x=339.38, y=72.00, z=247.06], EntityXPOrb['Experience Orb'/24322, l='MpServer', x=336.28, y=72.00, z=246.38], EntityItem['item.item.rottenFlesh'/24323, l='MpServer', x=339.47, y=72.00, z=252.31], EntityItem['item.item.rottenFlesh'/24324, l='MpServer', x=339.88, y=72.00, z=246.88], EntityZombie['Zombie'/26116, l='MpServer', x=440.50, y=15.00, z=282.50], EntityXPOrb['Experience Orb'/24325, l='MpServer', x=337.41, y=72.00, z=247.03], EntityZombie['Zombie'/26117, l='MpServer', x=440.41, y=15.00, z=284.46], EntityItem['item.item.rottenFlesh'/24326, l='MpServer', x=343.72, y=72.00, z=245.81], EntitySquid['Squid'/25350, l='MpServer', x=332.53, y=62.09, z=179.97], EntityXPOrb['Experience Orb'/24327, l='MpServer', x=339.84, y=72.00, z=253.72], EntitySquid['Squid'/25351, l='MpServer', x=333.91, y=62.03, z=177.44], EntityXPOrb['Experience Orb'/24328, l='MpServer', x=338.34, y=72.00, z=254.91], EntitySquid['Squid'/25352, l='MpServer', x=332.97, y=62.19, z=176.19], EntityXPOrb['Experience Orb'/24329, l='MpServer', x=338.00, y=72.00, z=255.41], EntityXPOrb['Experience Orb'/24330, l='MpServer', x=338.28, y=72.00, z=245.53], EntitySquid['Squid'/25354, l='MpServer', x=332.56, y=62.09, z=178.78], EntityItem['item.item.rottenFlesh'/24331, l='MpServer', x=336.97, y=72.00, z=244.19], EntityXPOrb['Experience Orb'/24332, l='MpServer', x=344.34, y=72.00, z=244.75], EntityXPOrb['Experience Orb'/24333, l='MpServer', x=344.34, y=73.00, z=247.50], EntityXPOrb['Experience Orb'/24334, l='MpServer', x=343.66, y=72.00, z=245.63], EntityXPOrb['Experience Orb'/24335, l='MpServer', x=338.91, y=72.00, z=248.34], EntityBat['Bat'/26130, l='MpServer', x=298.17, y=33.80, z=271.42], EntityBat['Bat'/26133, l='MpServer', x=299.89, y=33.56, z=273.27], EntityBat['Bat'/24343, l='MpServer', x=360.25, y=47.10, z=285.34], EntityZombie['Zombie'/24344, l='MpServer', x=349.66, y=49.00, z=290.91], EntitySkeleton['Skeleton'/24347, l='MpServer', x=379.59, y=19.00, z=270.28], EntitySkeleton['Skeleton'/24348, l='MpServer', x=369.38, y=18.00, z=268.28], EntityEnderman['Enderman'/25886, l='MpServer', x=296.50, y=47.00, z=243.50], EntityEnderman['Enderman'/25651, l='MpServer', x=424.50, y=42.00, z=280.50], EntityEnderman['Enderman'/25652, l='MpServer', x=424.50, y=42.00, z=282.50], EntityZombie['Zombie'/26179, l='MpServer', x=352.50, y=21.00, z=166.50], EntityZombie['Zombie'/25412, l='MpServer', x=306.50, y=34.00, z=198.50], EntityZombie['Zombie'/25413, l='MpServer', x=305.50, y=34.00, z=198.50], EntityBat['Bat'/25925, l='MpServer', x=362.38, y=17.88, z=173.38], EntityZombie['Zombie'/25414, l='MpServer', x=306.50, y=34.00, z=195.50], EntitySquid['Squid'/25215, l='MpServer', x=329.09, y=61.97, z=180.59], EntitySquid['Squid'/25216, l='MpServer', x=326.09, y=61.97, z=180.50], EntitySkeleton['Skeleton'/26004, l='MpServer', x=326.13, y=24.00, z=189.09], EntitySkeleton['Skeleton'/24214, l='MpServer', x=388.50, y=46.00, z=270.88], EntitySkeleton['Skeleton'/24215, l='MpServer', x=414.50, y=33.00, z=284.09], EntityPlayerSP['Player838'/24219, l='MpServer', x=367.80, y=77.00, z=213.87], EntityBat['Bat'/24243, l='MpServer', x=303.44, y=35.88, z=204.75], EntitySkeleton['Skeleton'/24244, l='MpServer', x=301.78, y=36.00, z=208.47], EntityCreeper['Creeper'/24245, l='MpServer', x=293.00, y=63.00, z=228.41], EntityCreeper['Creeper'/24246, l='MpServer', x=292.50, y=63.00, z=226.50], EntitySkeleton['Skeleton'/24247, l='MpServer', x=290.50, y=23.00, z=245.28], EntitySkeleton['Skeleton'/24248, l='MpServer', x=290.50, y=23.00, z=244.22], EntityBat['Bat'/24249, l='MpServer', x=293.53, y=22.10, z=256.25], EntityZombie['Zombie'/25785, l='MpServer', x=351.50, y=21.00, z=161.50], EntitySkeleton['Skeleton'/24250, l='MpServer', x=293.34, y=19.00, z=266.31], EntityZombie['Zombie'/24251, l='MpServer', x=296.53, y=20.00, z=263.91], EntityZombie['Zombie'/24252, l='MpServer', x=291.47, y=21.00, z=261.03], EntitySkeleton['Skeleton'/24253, l='MpServer', x=299.28, y=21.00, z=282.47], EntitySkeleton['Skeleton'/24254, l='MpServer', x=292.03, y=20.00, z=274.53], EntityZombie['Zombie'/24255, l='MpServer', x=309.16, y=57.00, z=288.22], EntityZombie['Zombie'/24256, l='MpServer', x=294.53, y=62.00, z=276.88], EntityZombie['Zombie'/24257, l='MpServer', x=303.97, y=57.00, z=287.41], EntityCreeper['Creeper'/24264, l='MpServer', x=310.81, y=53.00, z=252.22], EntityCreeper['Creeper'/24265, l='MpServer', x=311.50, y=53.00, z=250.97], EntityCreeper['Creeper'/24266, l='MpServer', x=312.44, y=54.00, z=253.22], EntityBat['Bat'/26058, l='MpServer', x=289.83, y=11.44, z=177.11], EntityCreeper['Creeper'/24267, l='MpServer', x=305.97, y=54.00, z=254.66], EntityCreeper['Creeper'/24268, l='MpServer', x=305.59, y=52.00, z=245.91], EntitySkeleton['Skeleton'/24269, l='MpServer', x=318.09, y=20.00, z=265.81], EntityZombie['Zombie'/24271, l='MpServer', x=312.31, y=56.91, z=273.69], EntityZombie['Zombie'/24272, l='MpServer', x=309.28, y=58.00, z=280.94], EntityZombie['Zombie'/24273, l='MpServer', x=312.22, y=58.00, z=284.13], EntityZombie['Zombie'/24274, l='MpServer', x=301.88, y=61.00, z=273.38], EntitySkeleton['Skeleton'/24277, l='MpServer', x=307.50, y=16.00, z=294.16], EntityItem['item.item.rottenFlesh'/24287, l='MpServer', x=335.88, y=72.00, z=242.91], EntityItem['item.item.rottenFlesh'/24288, l='MpServer', x=333.34, y=72.00, z=251.16], EntityXPOrb['Experience Orb'/24289, l='MpServer', x=333.63, y=72.00, z=251.19], EntityXPOrb['Experience Orb'/24290, l='MpServer', x=334.72, y=72.00, z=250.72], EntityXPOrb['Experience Orb'/24291, l='MpServer', x=333.63, y=72.00, z=251.75], EntityXPOrb['Experience Orb'/24292, l='MpServer', x=335.53, y=72.00, z=245.22], EntityXPOrb['Experience Orb'/24293, l='MpServer', x=334.50, y=72.00, z=244.66], EntityXPOrb['Experience Orb'/24294, l='MpServer', x=331.63, y=72.00, z=243.38], EntityXPOrb['Experience Orb'/24295, l='MpServer', x=335.84, y=72.00, z=244.44], EntityCreeper['Creeper'/24296, l='MpServer', x=320.66, y=19.00, z=262.53], EntityCreeper['Creeper'/24297, l='MpServer', x=320.78, y=55.00, z=258.25], EntityBat['Bat'/24298, l='MpServer', x=313.75, y=13.00, z=279.22], EntitySkeleton['Skeleton'/24299, l='MpServer', x=318.78, y=18.00, z=273.78], EntityBat['Bat'/24300, l='MpServer', x=319.19, y=20.00, z=267.16], EntitySkeleton['Skeleton'/24302, l='MpServer', x=326.81, y=61.00, z=276.50], EntitySpider['Spider'/24303, l='MpServer', x=334.97, y=60.00, z=289.47], EntityCreeper['Creeper'/26100, l='MpServer', x=374.50, y=31.00, z=189.50], EntityXPOrb['Experience Orb'/24316, l='MpServer', x=337.34, y=72.00, z=250.56], EntityXPOrb['Experience Orb'/24317, l='MpServer', x=338.38, y=72.00, z=250.34], EntityXPOrb['Experience Orb'/24318, l='MpServer', x=339.00, y=72.00, z=248.69], EntityXPOrb['Experience Orb'/24319, l='MpServer', x=338.94, y=72.00, z=248.75]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:390)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2388)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:434)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Mac OS X (x86_64) version 10.14.3
+	Java Version: 1.8.0_181, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 731984240 bytes (698 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 99
+	Launched Version: mcp
+	LWJGL: 2.9.2
+	OpenGL: Intel(R) Iris(TM) Plus Graphics 655 GL version 2.1 INTEL-12.4.7, Intel Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: The Caterpack
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i5-8259U CPU @ 2.30GHz

@@ -1,0 +1,115 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import de.Hero.settings.Setting;
+import net.minecraft.client.gui.Gui;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, null, 100, 40);
+	}
+
+	private ScreenPosition pos;
+
+	@EventTarget
+	public void onRender2D(Event2D event) {
+		if (!mc.isGuiEnabled()) {
+			List<Key> keys = null;
+
+			if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+				keys.add(Key.W);
+				keys.add(Key.A);
+				keys.add(Key.S);
+				keys.add(Key.D);
+			}
+			if (Client.instance.settingsManager.getSettingByName("Mouse").getValBoolean()) {
+				keys.add(Key.LMB);
+				keys.add(Key.RMB);
+			}
+
+			GL11.glPushMatrix();
+
+			boolean blend = GL11.glIsEnabled(GL11.GL_BLEND);
+
+			GL11.glDisable(GL11.GL_BLEND);
+
+			for (Key key : keys) {
+				int textWidth = fr.getStringWidth(key.getName());
+
+				Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY(),
+						key.getWidth() + key.getX() + pos.getAbsoluteX(),
+						key.getHeight() + key.getY() + pos.getAbsoluteY(),
+						key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+				fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+						pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+						key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+			}
+
+			if (blend) {
+				GL11.glEnable(GL11.GL_BLEND);
+			}
+
+			GL11.glPopMatrix();
+		}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		ArrayList<Key> keys;
+
+		if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+			keys.add(Key.W);
+			keys.add(Key.A);
+			keys.add(Key.S);
+			keys.add(Key.D);
+		}
+		if (Client.instance.settingsManager.getSettingByName("Mouse").getValBoolean()) {
+			keys.add(Key.LMB);
+			keys.add(Key.RMB);
+		}
+
+		GL11.glPushMatrix();
+
+		boolean blend = GL11.glIsEnabled(GL11.GL_BLEND);
+
+		GL11.glDisable(GL11.GL_BLEND);
+
+		for (Key key : keys) {
+			int textWidth = fr.getStringWidth(key.getName());
+
+			Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY(),
+					key.getWidth() + key.getX() + pos.getAbsoluteX(), key.getHeight() + key.getY() + pos.getAbsoluteY(),
+					key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+			fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+					pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+					key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+		}
+
+		if (blend) {
+			GL11.glEnable(GL11.GL_BLEND);
+		}
+
+		GL11.glPopMatrix();
+
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("WASD", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Mouse", this, true));
+	}
+
+}

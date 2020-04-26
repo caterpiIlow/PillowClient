@@ -1,0 +1,12 @@
+package caterpillow.Module.HUD;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+
+public class Coords extends Module {
+
+	public Coords() {
+		super("Coords", Keyboard.KEY_NONE, category);
+	}
+
+}

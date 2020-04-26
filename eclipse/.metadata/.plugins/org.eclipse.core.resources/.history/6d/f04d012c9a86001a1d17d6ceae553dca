@@ -1,0 +1,59 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import java.awt.Color;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import de.Hero.settings.Setting;
+import net.minecraft.client.gui.Gui;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, null, 50, 100);
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("WASD", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Mouse", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Jump", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Sneak", this, true));
+
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+
+			int count = 0;
+
+			if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+
+				Key key = Key.W;
+				int textWidth = fr.getStringWidth(key.getName());
+				Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY(),
+						key.getWidth() + key.getX() + pos.getAbsoluteX(),
+						key.getHeight() + key.getY() + pos.getAbsoluteY(),
+						key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+				fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+						pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+						key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+
+			}
+
+		}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 2, -1);
+	}
+
+}

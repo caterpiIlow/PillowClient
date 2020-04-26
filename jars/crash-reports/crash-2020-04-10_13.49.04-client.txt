@@ -1,0 +1,55 @@
+---- Minecraft Crash Report ----
+// Ouch. That hurt :(
+
+Time: 10/04/20 1:49 PM
+Description: Initializing game
+
+java.lang.ExceptionInInitializerError
+	at net.minecraft.client.Minecraft.createDisplay(Minecraft.java:605)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:470)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:408)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+Caused by: java.lang.NullPointerException
+	at caterpillow.Module.Render.HUD.setup(HUD.java:28)
+	at caterpillow.Module.Module.<init>(Module.java:21)
+	at caterpillow.Module.Render.HUD.<init>(HUD.java:22)
+	at caterpillow.Client.Client.<clinit>(Client.java:16)
+	... 5 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.client.Minecraft.createDisplay(Minecraft.java:605)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:470)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:408)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Mac OS X (x86_64) version 10.14.3
+	Java Version: 1.8.0_181, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 780164016 bytes (744 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: mcp
+	LWJGL: 2.9.2
+	OpenGL: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	GL Caps: 
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: The Caterpack
+	Current Language: ~~ERROR~~ NullPointerException: null
+	Profiler Position: N/A (disabled)
+	CPU: <unknown>

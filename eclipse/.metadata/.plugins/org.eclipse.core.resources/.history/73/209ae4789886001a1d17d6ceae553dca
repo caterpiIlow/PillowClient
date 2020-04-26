@@ -1,0 +1,26 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import java.awt.Color;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.settings.KeyBinding;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, null, 50, 100);
+	}
+
+	
+	
+	
+}

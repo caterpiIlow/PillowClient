@@ -1,0 +1,11 @@
+//package caterpillow.Module;
+//
+//public class RenderCall {
+//	public RenderCall() {
+//		for (Module m : ModuleManager.modules) {
+//			if (!m.isToggled())
+//				continue;
+//			m.onRender();
+//		}
+//	}
+//}

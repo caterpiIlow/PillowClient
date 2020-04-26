@@ -1,0 +1,181 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import de.Hero.settings.Setting;
+import net.minecraft.client.gui.Gui;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD);
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("WASD", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Mouse", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Jump", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Sneak", this, true));
+
+		pos = ScreenPosition.fromAbsolute(0, 0);
+		width = 60;
+		height = 60;
+
+	}
+
+	private List<Long> clicks = new ArrayList<Long>();
+	private boolean wasPressed;
+	private long lastPressed;
+
+	public int getCPS() {
+		final long time = System.currentTimeMillis();
+		this.clicks.removeIf(aLong -> aLong + 1000 < time);
+		return this.clicks.size();
+	}
+
+	private List<Long> clicks2 = new ArrayList<Long>();
+	private boolean wasPressed2;
+	private long lastPressed2;
+
+	public int getCPSRight() {
+		final long time = System.currentTimeMillis();
+		this.clicks2.removeIf(aLong -> aLong + 1000 < time);
+		return this.clicks2.size();
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+
+		if (pressed != this.wasPressed) {
+			System.out.println("something changed");
+			this.lastPressed = System.currentTimeMillis();
+			this.wasPressed = pressed;
+
+			if (pressed) {
+				System.out.println("click");
+				this.clicks.add(this.lastPressed);
+			}
+		}
+
+		final boolean pressed2 = Mouse.isButtonDown(1);
+
+		if (pressed2 != this.wasPressed2) {
+			System.out.println("something changed");
+			this.lastPressed2 = System.currentTimeMillis();
+			this.wasPressed2 = pressed2;
+
+			if (pressed2) {
+				System.out.println("click");
+				this.clicks2.add(this.lastPressed2);
+			}
+		}
+
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+
+			int count = 0;
+
+			if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+
+				drawKey(Key.W);
+				drawKey(Key.A);
+				drawKey(Key.S);
+				drawKey(Key.D);
+				count += 2;
+			}
+			if (Client.instance.settingsManager.getSettingByName("Mouse").getValBoolean()) {
+
+				drawMouse(Key.RMB, count);
+				drawMouse(Key.LMB, count);
+				count += 1;
+			}
+			if (Client.instance.settingsManager.getSettingByName("Jump").getValBoolean()) {
+
+				drawKey(Key.JUMP, count);
+				count += 1;
+			}
+			if (Client.instance.settingsManager.getSettingByName("Sneak").getValBoolean()) {
+
+				drawKey(Key.SNEAK, count);
+				count += 1;
+			}
+
+		}
+	}
+
+	private void drawKey(Key key, int count) {
+		int textWidth = fr.getStringWidth(key.getName());
+		Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY() + count * 20,
+				key.getWidth() + key.getX() + pos.getAbsoluteX(),
+				key.getHeight() + key.getY() + pos.getAbsoluteY() + count * 20,
+				key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+		fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+				pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + count * 20,
+				key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+	}
+
+	private void drawMouse(Key key, int count) {
+		int textWidth = fr.getStringWidth(key.getName());
+		Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY() + count * 20,
+				key.getWidth() + key.getX() + pos.getAbsoluteX(),
+				key.getHeight() + key.getY() + pos.getAbsoluteY() + count * 20,
+				key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+		fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+				pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4 + count * 20,
+				key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+	}
+
+	private void drawKey(Key key) {
+		int textWidth = fr.getStringWidth(key.getName());
+		Gui.drawRect(key.getX() + pos.getAbsoluteX(), key.getY() + pos.getAbsoluteY(),
+				key.getWidth() + key.getX() + pos.getAbsoluteX(), key.getHeight() + key.getY() + pos.getAbsoluteY(),
+				key.isDown() ? new Color(255, 255, 255, 100).getRGB() : new Color(0, 0, 0, 90).getRGB());
+		fr.drawString(key.getName(), pos.getAbsoluteX() + key.getX() + key.getWidth() / 2 - textWidth / 2,
+				pos.getAbsoluteY() + key.getY() + key.getHeight() / 2 - 4,
+				key.isDown() ? Color.black.getRGB() : Color.white.getRGB());
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		int count = 0;
+
+		if (Client.instance.settingsManager.getSettingByName("WASD").getValBoolean()) {
+
+			drawKey(Key.W);
+			drawKey(Key.A);
+			drawKey(Key.S);
+			drawKey(Key.D);
+			count += 2;
+		}
+		if (Client.instance.settingsManager.getSettingByName("Mouse").getValBoolean()) {
+
+			drawKey(Key.RMB, count);
+			drawKey(Key.LMB, count);
+			count += 1;
+		}
+		if (Client.instance.settingsManager.getSettingByName("Jump").getValBoolean()) {
+
+			drawKey(Key.JUMP, count);
+			count += 1;
+		}
+		if (Client.instance.settingsManager.getSettingByName("Sneak").getValBoolean()) {
+
+			drawKey(Key.SNEAK, count);
+			count += 1;
+		}
+
+		this.setHeight(count * 20);
+	}
+
+}

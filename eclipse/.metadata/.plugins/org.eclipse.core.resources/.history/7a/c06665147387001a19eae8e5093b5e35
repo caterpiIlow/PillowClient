@@ -1,0 +1,40 @@
+package caterpillow.Notification;
+
+import java.util.ArrayList;
+
+public class NotificationManager {
+	private static ArrayList<Notification> pendingNotifications = new ArrayList<Notification>();
+	private static Notification currentNotification = null;
+
+	public static void show(Notification notification) {
+		pendingNotifications.add(notification);
+		System.out.println("Added notification to queue");
+
+	}
+
+	public static void update() {
+		if (currentNotification != null && !currentNotification.isShown()) {
+			System.out.println("current notification not shown; setting current notification to null");
+
+			currentNotification = null;
+		}
+
+		if (currentNotification == null && !pendingNotifications.isEmpty()) {
+			currentNotification = pendingNotifications.get(0);
+			currentNotification = pendingNotifications.remove(0);
+
+			currentNotification.show();
+			System.out.println("Shwoing notification");
+
+		}
+
+	}
+
+	public static void notificationUpdate() {
+//		System.out.println("update");
+		update();
+
+		if (currentNotification != null)
+			currentNotification.render();
+	}
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="true"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="Syst"/>
+		<list key="findhistory">
+			<item value="Syst"/>
+			<item value="sys"/>
+			<item value="system"/>
+			<item value="co3"/>
+			<item value="c03"/>
+			<item value="render"/>
+			<item value="IRenderer"/>
+			<item value="iRen"/>
+			<item value="Client.instance.settingsManager.getSettingByName(&quot;HUD Style&quot;).getValString();"/>
+			<item value="Client.instance.settingsManager.getSettingByName(&quot;HUD Style&quot;).getValString()"/>
+			<item value="&quot;Style&quot;"/>
+			<item value="colorstate"/>
+			<item value="System.out"/>
+			<item value="&quot;Client scale&quot;"/>
+			<item value="potion"/>
+		</list>
+		<list key="replacehistory">
+			<item value="Module"/>
+			<item value="hudStyle"/>
+			<item value="&quot;HUD Style&quot;"/>
+			<item value="&quot;Name scale&quot;"/>
+			<item value="Reach"/>
+			<item value="Slow"/>
+			<item value="Test"/>
+			<item value="Normal"/>
+			<item value="banana"/>
+			<item value="esp"/>
+			<item value="vertical"/>
+			<item value="horizontal"/>
+			<item value="EntityUtils.getRotationsNeeded"/>
+			<item value="Silent Aim"/>
+			<item value="func_181563_a"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="930"/>
+		<item key="DIALOG_Y_ORIGIN" value="378"/>
+		<item key="DIALOG_WIDTH" value="294"/>
+		<item key="DIALOG_HEIGHT" value="408"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+</section>

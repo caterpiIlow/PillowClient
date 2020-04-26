@@ -1,0 +1,39 @@
+package caterpillow.Notification;
+
+import java.util.concurrent.LinkedBlockingQueue;
+
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+
+public class NotificationManager {
+	private static LinkedBlockingQueue<Notification> pendingNotifications = new LinkedBlockingQueue<>();
+	private static Notification currentNotification = null;
+
+	public static void show(Notification notification) {
+		pendingNotifications.add(notification);
+		System.out.println("Added notification to queue");
+
+	}
+
+	public void update() {
+		if (currentNotification != null && !currentNotification.isShown()) {
+			currentNotification = null;
+		}
+
+		if (currentNotification == null && !pendingNotifications.isEmpty()) {
+			currentNotification = pendingNotifications.poll();
+			currentNotification.show();
+			System.out.println("Shwoing notification");
+
+		}
+
+	}
+
+	@EventTarget
+	public static void onRender2D(Event2D event) {
+		update();
+
+		if (currentNotification != null)
+			currentNotification.render();
+	}
+}

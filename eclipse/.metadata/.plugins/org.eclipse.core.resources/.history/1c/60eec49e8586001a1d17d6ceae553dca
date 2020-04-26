@@ -1,0 +1,92 @@
+package caterpillow.Module.HUD;
+
+import java.util.Collection;
+import java.util.Set;
+
+import org.lwjgl.input.Keyboard;
+
+import com.google.common.collect.Sets;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventManager;
+import net.minecraft.client.Minecraft;
+
+public class HUDManager extends Module {
+
+	public HUDManager() {
+		super("HUDManager", Keyboard.KEY_K, Category.HUD);
+
+	}
+
+	private static HUDManager instance = null;
+
+	public static HUDManager getInstance() {
+
+		if (instance != null) {
+			return instance;
+		}
+
+		instance = new HUDManager();
+
+		EventManager.register(instance);
+
+		return instance;
+
+	}
+
+	private Set<Module> registeredRenderers = Sets.newHashSet();
+
+	private Minecraft mc = Minecraft.getMinecraft();
+
+	public void register(Module... renderers) {
+		for (Module render : renderers) {
+
+			this.registeredRenderers.add(render);
+
+		}
+	}
+
+	public void unregister(Module... renderers) {
+		for (Module render : renderers) {
+
+			this.registeredRenderers.remove(render);
+
+		}
+	}
+
+	public Collection<Module> getRegisteredRenderers() {
+		return Sets.newHashSet(registeredRenderers);
+	}
+
+	public void openConfigScreen() {
+		mc.displayGuiScreen(new HUDConfigScreen(this));
+	}
+
+//	@EventTarget
+//	public void onRender(RenderEvent e) {
+//		if (mc.currentScreen == null || mc.currentScreen instanceof GuiContainer
+//				|| mc.currentScreen instanceof GuiChat) {
+//
+//			for (Module renderer : registeredRenderers) {
+//				callRenderer(renderer);
+//			}
+//
+//		}
+//	}
+//
+//	public void callRenderer(Module renderer) {
+//		if (!renderer.isToggled()) {
+//			return;
+//		}
+//
+//		ScreenPosition pos = renderer.load();
+//
+//		if (pos == null) {
+//			pos = ScreenPosition.fromRelativePosition(0.5, 0.5);
+//		}
+//
+//		renderer.render(pos);
+//	}
+
+}

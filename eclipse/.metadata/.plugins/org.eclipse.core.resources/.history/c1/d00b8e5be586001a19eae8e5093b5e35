@@ -1,0 +1,7 @@
+package caterpillow.Module.HUD;
+
+import caterpillow.Module.Module;
+
+public class Coords extends Module {
+
+}

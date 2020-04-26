@@ -1,0 +1,14 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, null, 50, 100);
+	}
+
+}

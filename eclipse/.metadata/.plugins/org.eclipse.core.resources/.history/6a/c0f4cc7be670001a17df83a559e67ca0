@@ -1,0 +1,92 @@
+package caterpillow.Module.Movement;
+
+import java.util.ArrayList;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.EventUpdate;
+import caterpillow.tutorial.Tutorial;
+import de.Hero.settings.Setting;
+
+public class Fly extends Module {
+	public Fly() {
+		super("Fly", Keyboard.KEY_B, Category.MOVEMENT);
+	}
+
+	@EventTarget
+	public void onUpdate(EventUpdate event) {
+		System.out.println(this.isToggled());
+
+		double speed = Tutorial.instance.settingsManager.getSettingByName("Speed").getValDouble();
+		if (Tutorial.instance.settingsManager.getSettingByName("Mode").getValString().equalsIgnoreCase("Normal")) {
+
+			this.setDisplayName("Fly - §7Normal");
+
+			mc.thePlayer.capabilities.isFlying = true;
+			mc.thePlayer.capabilities.allowFlying = true;
+
+		} else if (Tutorial.instance.settingsManager.getSettingByName("Mode").getValString()
+				.equalsIgnoreCase("Motion")) {
+			this.setDisplayName("Fly - §7Motion");
+
+			if (mc.thePlayer.movementInput.jump) {
+				mc.thePlayer.motionY = speed * 0.6D;
+
+			} else if (mc.thePlayer.movementInput.sneak) {
+				mc.thePlayer.motionY = -speed * 0.6D;
+
+			} else {
+				mc.thePlayer.motionY = 0.0D;
+			}
+
+			double forward = mc.thePlayer.movementInput.moveForward;
+			double strafe = mc.thePlayer.movementInput.moveStrafe;
+			float yaw = mc.thePlayer.rotationYaw;
+			if (forward == 0.0D && strafe == 0.0D) {
+				mc.thePlayer.motionX = 0;
+				mc.thePlayer.motionZ = 0;
+			} else {
+				if (forward != 0.0D) {
+					if (strafe > 0.0D) {
+						yaw += ((forward > 0.0D) ? -45 : 45);
+					} else if (strafe < 0.0D) {
+						yaw += ((forward > 0.0D) ? 45 : -45);
+					}
+					strafe = 0.0D;
+					if (forward > 0.0D) {
+						forward = 1.0D;
+					} else if (forward < 0.0D) {
+						forward = -1.0D;
+					}
+				}
+				mc.thePlayer.motionX = (forward * speed * Math.cos(Math.toRadians((yaw + 90.0F)))
+						+ strafe * speed * Math.sin(Math.toRadians((yaw + 90.0F))));
+				mc.thePlayer.motionZ = (forward * speed * Math.sin(Math.toRadians((yaw + 90.0F)))
+						- strafe * speed * Math.cos(Math.toRadians((yaw + 90.0F))));
+
+			}
+
+		}
+	}
+
+	@Override
+	public void onDisable() {
+		super.onDisable();
+
+		mc.thePlayer.capabilities.isFlying = false;
+		mc.thePlayer.capabilities.allowFlying = false;
+	}
+
+	@Override
+	public void setup() {
+		ArrayList<String> options = new ArrayList<>();
+		options.add("Normal");
+		options.add("Motion");
+		Tutorial.instance.settingsManager.rSetting(new Setting("Mode", this, "Normal", options));
+		Tutorial.instance.settingsManager.rSetting(new Setting("Speed", this, 1, 1, 10, true, 0.1));
+
+	}
+}

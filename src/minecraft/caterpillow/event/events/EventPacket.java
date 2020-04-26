@@ -1,0 +1,60 @@
+package caterpillow.event.events;
+
+import java.util.ArrayList;
+
+import caterpillow.event.Event;
+import net.minecraft.network.Packet;
+
+public class EventPacket extends Event {
+	private Packet packet;
+
+	private boolean isSkipped;
+
+	private boolean outgoing;
+
+	private boolean pre;
+
+	public boolean isPre() {
+		return this.pre;
+	}
+
+	public boolean isPost() {
+		return !this.pre;
+	}
+
+	public Packet getPacket() {
+		return this.packet;
+	}
+
+	public void setPacket(Packet packet) {
+		this.packet = packet;
+	}
+
+	public boolean isOutgoing() {
+		return this.outgoing;
+	}
+
+	public boolean isIncoming() {
+		return !this.outgoing;
+	}
+
+	@Override
+	public void fire(ArrayList listeners) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Class getListenerType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean getCancelledState() {
+		return this.isSkipped;
+	}
+
+	public void setSkip(boolean isCancelled) {
+		this.isSkipped = isCancelled;
+	}
+}

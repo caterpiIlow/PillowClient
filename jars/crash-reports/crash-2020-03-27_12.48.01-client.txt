@@ -1,0 +1,81 @@
+---- Minecraft Crash Report ----
+// Would you like a cupcake?
+
+Time: 27/03/20 12:48 PM
+Description: Unexpected error
+
+java.lang.Error: Unresolved compilation problems: 
+	The operator >> is undefined for the argument type(s) double, int
+	The operator >> is undefined for the argument type(s) double, int
+	The operator >> is undefined for the argument type(s) double, int
+	The operator & is undefined for the argument type(s) double, int
+
+	at net.minecraft.client.gui.Gui.drawRect(Gui.java:66)
+	at caterpillow.Module.Render.HUD.draw(HUD.java:57)
+	at net.minecraft.client.gui.GuiIngame.renderGameOverlay(GuiIngame.java:356)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1170)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1135)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:424)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.client.gui.Gui.drawRect(Gui.java:66)
+	at caterpillow.Module.Render.HUD.draw(HUD.java:57)
+	at net.minecraft.client.gui.GuiIngame.renderGameOverlay(GuiIngame.java:356)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player970'/134, l='MpServer', x=624.49, y=72.00, z=301.60]]
+	Chunk stats: MultiplayerChunkCache: 200, 200
+	Level seed: 0
+	Level generator: ID 02 - largeBiomes, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 584.00,64.00,166.00 - World: (584,64,166), Chunk: (at 8,4,6 in 36,10; contains blocks 576,0,160 to 591,255,175), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 37173 game time, 36553 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 64 total; [EntityZombie['Zombie'/135, l='MpServer', x=592.32, y=24.00, z=373.70], EntityZombie['Zombie'/136, l='MpServer', x=590.28, y=24.00, z=371.81], EntityZombie['Zombie'/137, l='MpServer', x=591.22, y=24.00, z=372.91], EntityMinecartChest['container.minecart'/138, l='MpServer', x=592.50, y=24.06, z=378.50], EntityCreeper['Creeper'/140, l='MpServer', x=613.50, y=25.00, z=372.50], EntityCreeper['Creeper'/141, l='MpServer', x=611.50, y=25.00, z=371.50], EntityZombie['Zombie'/142, l='MpServer', x=633.56, y=34.00, z=380.97], EntitySkeleton['Skeleton'/14, l='MpServer', x=559.50, y=59.00, z=299.50], EntityEnderman['Enderman'/15, l='MpServer', x=546.50, y=36.00, z=347.50], EntityEnderman['Enderman'/16, l='MpServer', x=548.50, y=36.00, z=350.50], EntityPlayerSP['Player970'/134, l='MpServer', x=624.49, y=72.00, z=301.60], EntityCreeper['Creeper'/17, l='MpServer', x=545.50, y=36.00, z=350.50], EntityBat['Bat'/18, l='MpServer', x=555.51, y=31.07, z=348.85], EntityCreeper['Creeper'/21, l='MpServer', x=562.63, y=59.00, z=297.91], EntitySpider['Spider'/22, l='MpServer', x=561.00, y=59.00, z=299.97], EntitySpider['Spider'/27, l='MpServer', x=581.50, y=38.00, z=255.50], EntityZombie['Zombie'/28, l='MpServer', x=581.50, y=38.00, z=251.50], EntitySkeleton['Skeleton'/29, l='MpServer', x=581.50, y=36.00, z=300.50], EntitySkeleton['Skeleton'/30, l='MpServer', x=581.50, y=36.00, z=303.50], EntityCreeper['Creeper'/31, l='MpServer', x=581.50, y=36.00, z=299.50], EntityBat['Bat'/32, l='MpServer', x=591.32, y=28.07, z=319.75], EntityCreeper['Creeper'/33, l='MpServer', x=587.50, y=28.00, z=360.50], EntitySkeleton['Skeleton'/34, l='MpServer', x=585.50, y=28.00, z=360.50], EntityCreeper['Creeper'/35, l='MpServer', x=585.50, y=28.00, z=362.50], EntityCreeper['Creeper'/48, l='MpServer', x=592.56, y=15.00, z=251.94], EntityBat['Bat'/49, l='MpServer', x=596.31, y=29.16, z=327.38], EntityItem['item.tile.torch'/50, l='MpServer', x=597.88, y=27.00, z=359.88], EntitySkeleton['Skeleton'/53, l='MpServer', x=610.50, y=19.00, z=245.50], EntityBat['Bat'/54, l='MpServer', x=617.04, y=32.74, z=333.61], EntitySkeleton['Skeleton'/61, l='MpServer', x=637.50, y=15.00, z=224.50], EntitySkeleton['Skeleton'/62, l='MpServer', x=636.50, y=15.00, z=224.50], EntitySkeleton['Skeleton'/63, l='MpServer', x=637.47, y=22.00, z=314.41], EntitySkeleton['Skeleton'/64, l='MpServer', x=637.81, y=22.00, z=307.78], EntitySkeleton['Skeleton'/65, l='MpServer', x=624.25, y=31.00, z=326.16], EntityMinecartChest['container.minecart'/66, l='MpServer', x=630.50, y=35.06, z=324.50], EntityCreeper['Creeper'/67, l='MpServer', x=633.63, y=32.00, z=334.94], EntitySkeleton['Skeleton'/68, l='MpServer', x=630.50, y=32.00, z=342.50], EntityCreeper['Creeper'/69, l='MpServer', x=634.50, y=32.00, z=344.50], EntityCreeper['Creeper'/70, l='MpServer', x=636.50, y=32.00, z=348.50], EntityZombie['Zombie'/71, l='MpServer', x=633.34, y=36.00, z=340.34], EntityZombie['Zombie'/72, l='MpServer', x=635.50, y=36.00, z=337.50], EntityCreeper['Creeper'/81, l='MpServer', x=643.69, y=15.00, z=238.91], EntityBat['Bat'/82, l='MpServer', x=654.29, y=15.05, z=242.07], EntitySpider['Spider'/83, l='MpServer', x=642.50, y=22.00, z=311.50], EntitySkeleton['Skeleton'/84, l='MpServer', x=644.81, y=23.00, z=315.81], EntitySkeleton['Skeleton'/85, l='MpServer', x=668.50, y=15.00, z=271.50], EntitySkeleton['Skeleton'/86, l='MpServer', x=667.50, y=15.00, z=272.50], EntityBat['Bat'/87, l='MpServer', x=667.71, y=30.69, z=294.53], EntityBat['Bat'/88, l='MpServer', x=671.50, y=31.10, z=300.06], EntityBat['Bat'/89, l='MpServer', x=669.86, y=30.22, z=294.47], EntitySkeleton['Skeleton'/90, l='MpServer', x=668.50, y=26.00, z=337.50], EntityCreeper['Creeper'/101, l='MpServer', x=676.24, y=16.00, z=251.11], EntityCreeper['Creeper'/102, l='MpServer', x=675.50, y=16.00, z=252.50], EntityBat['Bat'/103, l='MpServer', x=675.58, y=23.96, z=299.26], EntityBat['Bat'/104, l='MpServer', x=678.42, y=23.97, z=296.58], EntityMinecartChest['container.minecart'/107, l='MpServer', x=695.50, y=18.06, z=237.50], EntityZombie['Zombie'/108, l='MpServer', x=701.50, y=35.00, z=269.50], EntityBat['Bat'/109, l='MpServer', x=696.26, y=16.93, z=283.26], EntitySkeleton['Skeleton'/110, l='MpServer', x=697.50, y=18.00, z=280.50], EntitySkeleton['Skeleton'/111, l='MpServer', x=696.28, y=16.00, z=283.88], EntityCreeper['Creeper'/112, l='MpServer', x=698.19, y=18.00, z=281.38], EntityCreeper['Creeper'/113, l='MpServer', x=698.50, y=18.00, z=280.50], EntityCreeper['Creeper'/114, l='MpServer', x=700.91, y=35.00, z=275.66], EntityCreeper['Creeper'/116, l='MpServer', x=704.50, y=35.00, z=275.50]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:380)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2755)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:453)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Mac OS X (x86_64) version 10.14.3
+	Java Version: 1.8.0_181, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 654326768 bytes (624 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 2, tcache: 0, allocated: 13, tallocated: 99
+	Launched Version: mcp
+	LWJGL: 2.9.2
+	OpenGL: Intel(R) Iris(TM) Plus Graphics 655 GL version 2.1 INTEL-12.4.7, Intel Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because ARB_framebuffer_object is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 8x Intel(R) Core(TM) i5-8259U CPU @ 2.30GHz

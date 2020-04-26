@@ -1,0 +1,38 @@
+package caterpillow.Notification;
+
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class NotificationManager {
+	private static List<Notification> pendingNotifications = new List<>();
+	private static Notification currentNotification = null;
+
+	public static void show(Notification notification) {
+		pendingNotifications.add(notification);
+		System.out.println("Added notification to queue");
+
+	}
+
+	public static void update() {
+		if (currentNotification != null && !currentNotification.isShown()) {
+			System.out.println("current notification not shown; setting current notification to null");
+
+			currentNotification = null;
+		}
+
+		if (currentNotification == null && !pendingNotifications.isEmpty()) {
+			currentNotification = pendingNotifications.poll();
+			currentNotification.show();
+			System.out.println("Shwoing notification");
+
+		}
+
+	}
+
+	public static void notificationUpdate() {
+//		System.out.println("update");
+		update();
+
+		if (currentNotification != null)
+			currentNotification.render();
+	}
+}

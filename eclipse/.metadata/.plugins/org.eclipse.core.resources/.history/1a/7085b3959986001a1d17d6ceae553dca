@@ -1,0 +1,54 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import de.Hero.settings.Setting;
+
+public class KeyStrokes extends Module {
+
+	public KeyStrokes() {
+		super("KeyStrokes", Keyboard.KEY_NONE, Category.HUD, null, 50, 100);
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("WASD", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Mouse", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Jump", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Sneak", this, true));
+
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+			
+			
+			fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 2, -1);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 2, -1);
+	}
+
+}

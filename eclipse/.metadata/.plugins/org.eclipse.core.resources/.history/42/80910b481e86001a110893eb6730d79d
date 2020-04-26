@@ -1,0 +1,167 @@
+package caterpillow.Module;
+
+import caterpillow.Client.Client;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+
+public class Module {
+
+	protected Minecraft mc = Minecraft.getMinecraft();
+
+	private String name, displayName;
+	private int key;
+	private Category category;
+	private boolean toggled;
+
+	public Module(String name, int key, Category category) {
+		this.name = name;
+		this.key = key;
+		this.category = category;
+		System.out.println(category);
+		for (String x : Client.instance.moduleManager.defaults)
+			if (name == x) {
+				toggled = true;
+				onToggle();
+				onEnable();
+				break;
+			} else {
+				toggled = false;
+			}
+		setDisplayName(name);
+
+		setup();
+
+	}
+
+	public void onEnable() {
+		Client.instance.eventManager.register(this);
+	}
+
+	public void onDisable() {
+		Client.instance.eventManager.unregister(this);
+
+	}
+
+	public void onToggle() {
+	}
+
+	public void renderDummy() {
+
+	}
+
+	public void toggle() {
+		toggled = !toggled;
+		onToggle();
+		if (toggled) {
+			onEnable();
+			Minecraft.getMinecraft().thePlayer.playSound("random.click", 1f, 1f);
+		} else {
+			onDisable();
+			Minecraft.getMinecraft().thePlayer.playSound("random.click", 1f, 0.5f);
+		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public boolean isToggled() {
+		return toggled;
+	}
+
+	public String getDisplayName() {
+		String color = settingEquals("Text Color", "Category") ? getColor() : "";
+		return color + displayName;
+	}
+
+	private boolean settingEquals(String setting, String name) {
+		return Client.instance.settingsManager.getSettingByName(setting).getValString().equalsIgnoreCase(name);
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public String getColor() {
+		switch (this.category) {
+		case COMBAT:
+			return "§c";
+		case MOVEMENT:
+			return "§e";
+		case PLAYER:
+			return "§a";
+		case RENDER:
+			return "§b";
+		default:
+			return "§7";
+		}
+	}
+
+	public int getDecimalColor() {
+		switch (this.category) {
+		case COMBAT:
+			return 16733525;
+		case MOVEMENT:
+			return 16777045;
+		case PLAYER:
+			return 5635925;
+		case RENDER:
+			return 5636095;
+		default:
+			return 11184810;
+		}
+	}
+
+	public int getHexColor() {
+		if (settingEquals("Text Color", "None"))
+			return 0xFFFFFFFF;
+		switch (this.category) {
+		case COMBAT:
+			return 0xFFFF5555;
+		case MOVEMENT:
+			return 0xFFFFFF55;
+		case PLAYER:
+			return 0xFF55FF55;
+		case RENDER:
+			return 0xFF55FFFF;
+		default:
+			return 0xFFAAAAAA;
+		}
+	}
+
+	public void setup() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public EntityLivingBase getClosest(double range) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isBlockUnder() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

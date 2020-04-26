@@ -1,0 +1,81 @@
+package caterpillow.Module.HUD;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import net.minecraft.client.gui.Gui;
+
+public class CPS extends Module {
+
+	public CPS() {
+		super("CPS", Keyboard.KEY_NONE, Category.HUD);
+	}
+
+	private List<Long> clicks = new ArrayList<Long>();
+	private boolean wasPressed;
+	private long lastPressed;
+
+	public int getCPS() {
+		final long time = System.currentTimeMillis();
+		this.clicks.removeIf(aLong -> aLong + 1000 < time);
+		return this.clicks.size();
+	}
+	
+	public int getCPSRight() {
+		final long time = System.currentTimeMillis();
+		this.clicks.removeIf(aLong -> aLong + 1000 < time);
+		return this.clicks.size();
+	}
+
+	@Override
+	public void setup() {
+
+		System.out.println("setup");
+
+		pos = ScreenPosition.fromTopRight(50, 13);
+		width = 50;
+		height = fr.FONT_HEIGHT + 5;
+
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+
+		final boolean pressed = Mouse.isButtonDown(0);
+
+		if (pressed != this.wasPressed) {
+			System.out.println("something changed");
+			this.lastPressed = System.currentTimeMillis();
+			this.wasPressed = pressed;
+
+			if (pressed) {
+				System.out.println("click");
+				this.clicks.add(this.lastPressed);
+			}
+		}
+
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+
+			Gui.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + 50,
+					pos.getAbsoluteY() + fr.FONT_HEIGHT + 4, 0x90000000);
+
+			fr.drawStringWithShadow(getCPS() + " CPS",
+					pos.getAbsoluteX() + (50 - (fr.getStringWidth(getCPS() + " CPS"))) / 2, pos.getAbsoluteY() + 3, -1);
+		}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		fr.drawStringWithShadow("69 CPS", pos.getAbsoluteX() + (50 - (fr.getStringWidth("69 CPS"))) / 2,
+				pos.getAbsoluteY() + 3, -1);
+	}
+
+}

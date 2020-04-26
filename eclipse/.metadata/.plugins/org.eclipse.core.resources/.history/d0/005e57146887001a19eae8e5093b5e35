@@ -1,0 +1,5 @@
+package caterpillow.Other;
+
+public class IMixinItemRenderer {
+
+}

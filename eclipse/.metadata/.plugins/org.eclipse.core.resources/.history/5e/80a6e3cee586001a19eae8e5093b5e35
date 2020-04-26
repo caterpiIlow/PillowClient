@@ -1,0 +1,48 @@
+package caterpillow.Module.HUD;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import net.minecraft.client.gui.Gui;
+
+public class Coords extends Module {
+
+	public Coords() {
+		super("Coords", Keyboard.KEY_NONE, Category.HUD);
+	}
+	
+	@Override
+	public void setup() {
+		pos = ScreenPosition.fromTopRight(50, 0);
+		width = 50;
+		height = fr.FONT_HEIGHT + 5;
+
+	}
+
+	@EventTarget
+	public void onRender2D(Event2D event) {
+		Gui.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + 50,
+				pos.getAbsoluteY() + 6 + (fr.FONT_HEIGHT + 2) * 3, 0x90000000);
+		fr.drawStringWithShadow("§6X: §f" + (double) Math.round(mc.thePlayer.posX * 10) / 10, pos.getAbsoluteX() + 4,
+				pos.getAbsoluteY() + 4, -1);
+		fr.drawStringWithShadow("§6Y: §f" + (double) Math.round(mc.thePlayer.posY * 10) / 10, pos.getAbsoluteX() + 4,
+				pos.getAbsoluteY() + 4 + fr.FONT_HEIGHT + 2, -1);
+		fr.drawStringWithShadow("§6Z: §f" + (double) Math.round(mc.thePlayer.posZ * 10) / 10, pos.getAbsoluteX() + 4,
+				pos.getAbsoluteY() + 4 + (fr.FONT_HEIGHT + 2) * 2, -1);
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		Gui.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + 50,
+				pos.getAbsoluteY() + 6 + (fr.FONT_HEIGHT + 2) * 3, 0x90000000);
+		fr.drawStringWithShadow("§6X: §f420", pos.getAbsoluteX() + 4, pos.getAbsoluteY() + 4, -1);
+		fr.drawStringWithShadow("§6Y: §f69", pos.getAbsoluteX() + 4, pos.getAbsoluteY() + 4 + fr.FONT_HEIGHT + 2, -1);
+		fr.drawStringWithShadow("§6Z: §f666", pos.getAbsoluteX() + 4, pos.getAbsoluteY() + 4 + (fr.FONT_HEIGHT + 2) * 2,
+				-1);
+
+	}
+
+}

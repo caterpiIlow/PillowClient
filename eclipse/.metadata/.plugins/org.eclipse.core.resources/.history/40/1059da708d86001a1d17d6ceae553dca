@@ -1,0 +1,47 @@
+package caterpillow.Module.HUD.KeyStrokes;
+
+import net.minecraft.client.Minecraft;
+
+public static enum Keys() {
+
+	WASD(Key.W, Key.A, Key.S, Key.D), WASD_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB),
+	WASD_SPRINT(Key.W, Key.A, Key.S, Key.D,
+			new Key("Sprint", Minecraft.getMinecraft().gameSettings.keyBindSprint, 1, 41, 58, 18)),
+	WASD_SPRINT_MOUSE(Key.W, Key.A, Key.S, Key.D, Key.LMB, Key.RMB,
+			new Key("Sprint", Minecraft.getMinecraft().gameSettings.keyBindSprint, 1, 61, 58, 18));
+
+	private final Key[] keys;
+	private int width = 0;
+	private int height = 0;
+
+	private KeyStrokesMode(Key... keysIn) {
+		this.keys = keysIn;
+
+		for (Key key : keys) {
+			this.width = Math.max(this.width, key.getX() + key.width);
+			this.height = Math.max(this.height, key.getY() + key.height);
+
+		}
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public Key[] getKeys() {
+		return keys;
+	}
+
+}

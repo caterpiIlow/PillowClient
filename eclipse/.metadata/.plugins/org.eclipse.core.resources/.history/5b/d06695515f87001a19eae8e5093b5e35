@@ -1,0 +1,37 @@
+package caterpillow.Module.Render;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Module.Category;
+
+public class Particles extends Module{
+	
+	public Particles() {
+		super("PArticles", Keyboard.KEY_NONE, Category.RENDER);
+	}
+	
+	@EventTarget
+	public void onUpdate(EventMotionUpdate event) {
+		if (this.isEnabled()) {
+			for (Iterator<Entity> entities = mc.theWorld.loadedEntityList.iterator(); entities.hasNext();) {
+				Object theObject = entities.next();
+				if (theObject instanceof EntityLivingBase) {
+					EntityLivingBase entityplayer = (EntityLivingBase) theObject;
+					if (entityplayer.hurtTime >= 9) {
+						if (this.getBool("Sharpness")) {
+							for (int i = 0; i < this.getDouble("Amount"); i++) {
+								mc.thePlayer.onEnchantmentCritical(entityplayer);
+							}
+						}
+						if (this.getBool("Criticals")) {
+							for (int i = 0; i < this.getDouble("Amount"); i++) {
+								mc.thePlayer.onCriticalHit(entityplayer);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

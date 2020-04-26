@@ -1,0 +1,53 @@
+package caterpillow.Module.Render;
+
+import java.util.Iterator;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.EventUpdate;
+import de.Hero.settings.Setting;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+
+public class Particles extends Module {
+
+	public Particles() {
+		super("Particles", Keyboard.KEY_NONE, Category.RENDER);
+	}
+
+	@Override
+	public void setup() {
+		Client.instance.settingsManager.rSetting(new Setting("Sharpness", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Multiplier", this, 1, 1, 10, "SharpMultiplier", true));
+		Client.instance.settingsManager.rSetting(new Setting("Criticals", this, true));
+		Client.instance.settingsManager.rSetting(new Setting("Multiplier", this, 1, 1, 10, "CritMultiplier", true));
+	}
+
+	@EventTarget
+	public void onUpdate(EventUpdate event) {
+		for (Iterator<Entity> entities = mc.theWorld.loadedEntityList.iterator(); entities.hasNext();) {
+			Object theObject = entities.next();
+			if (theObject instanceof EntityLivingBase) {
+				EntityLivingBase entityplayer = (EntityLivingBase) theObject;
+				if (entityplayer.hurtTime >= 9) {
+					if (Client.instance.settingsManager.getSettingByName("Sharpness").getValBoolean()) {
+						for (int i = 0; i < Client.instance.settingsManager.getSettingByID("SharpMultiplier").getValDouble()
+								; i++) {
+							mc.thePlayer.onEnchantmentCritical(entityplayer);
+						}
+					}
+					if (this.getBool("Criticals")) {
+						for (int i = 0; i < this.getDouble("Amount"); i++) {
+							mc.thePlayer.onCriticalHit(entityplayer);
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

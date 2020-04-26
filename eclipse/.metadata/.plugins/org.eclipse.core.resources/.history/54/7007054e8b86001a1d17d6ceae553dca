@@ -1,0 +1,84 @@
+package caterpillow.Module;
+
+import java.util.ArrayList;
+
+import caterpillow.Module.HUD.HUDManager;
+import caterpillow.Module.HUD.TestText;
+import caterpillow.Module.Misc.ServerCrasher;
+import caterpillow.Module.Movement.Sprint;
+import caterpillow.Module.Player.FastPlace;
+import caterpillow.Module.Player.InvMove;
+import caterpillow.Module.Player.NoClip;
+import caterpillow.Module.Player.NoFall;
+import caterpillow.Module.Render.ClickGUI;
+import caterpillow.Module.Render.ESP;
+import caterpillow.Module.Render.Fullbright;
+import caterpillow.Module.Render.HUD;
+import caterpillow.Module.Render.Tracers;
+
+public class ModuleManager {
+	public static ArrayList<Module> modules = new ArrayList<Module>();
+	public static ArrayList<String> defaults = new ArrayList<String>();
+
+	public ModuleManager() {
+		// DEFAULTS
+		defaults.add("KeepSprint");
+		defaults.add("Fullbright");
+//		defaults.add("HUD");
+//		defaults.add("FastPlace");
+		defaults.add("TestText");
+
+		// COMBAT
+//		modules.add(new KillAura());
+//		modules.add(new AntiBot());
+//		modules.add(new AutoArmour());
+//		modules.add(new Criticals());
+//		modules.add(new Velocity());
+
+		// MOVEMENT
+		modules.add(new Sprint());
+//		modules.add(new Fly());
+//		modules.add(new Step());
+		// modules.add(new Spider());
+//		modules.add(new LongJump());
+//		modules.add(new Phase());
+//		modules.add(new Strafe());
+//		modules.add(new Speed());
+//		modules.add(new Scaffold());
+
+		// PLAYER
+		modules.add(new NoFall());
+		modules.add(new FastPlace());
+		modules.add(new NoClip());
+		modules.add(new InvMove());
+
+		// modules.add(new NoSlowDown());
+
+		// RENDER
+		modules.add(new Fullbright());
+		modules.add(new ClickGUI());
+		modules.add(new HUD());
+		modules.add(new Tracers());
+		modules.add(new ESP());
+
+		// MISC
+		modules.add(new ServerCrasher());
+		// HUD
+		modules.add(new HUDManager());
+		modules.add(new TestText());
+
+	}
+
+	public ArrayList<Module> getModules() {
+		return modules;
+	}
+
+	public Module getModulesByName(String name) {
+		return modules.stream().filter(module -> module.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+	}
+
+	public ArrayList<Module> getToggledModules() {
+		return (ArrayList<Module>) modules.stream().filter(module -> module.isToggled());
+	}
+
+}

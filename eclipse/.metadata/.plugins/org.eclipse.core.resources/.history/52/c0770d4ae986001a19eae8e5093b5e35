@@ -1,0 +1,47 @@
+package caterpillow.Module.HUD;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
+
+public class Armour extends Module {
+
+	public Armour() {
+		super("Armour", Keyboard.KEY_NONE, Category.HUD);
+	}
+
+	@Override
+	public void setup() {
+
+		ScaledResolution sr = new ScaledResolution(mc);
+
+		pos = ScreenPosition.fromAbsolute(sr.getScaledWidth() - 64, sr.getScaledHeight() - 64);
+		width = 64;
+		height = 64;
+
+	}
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+
+		if (!Client.instance.moduleManager.getModulesByName("HUDManager").isToggled()) {
+			for (int i = 0; i < mc.thePlayer.inventory.armorInventory.length; i++) {
+				ItemStack itemStack = mc.thePlayer.inventory.armorInventory[i];
+				renderItemStack(pos, i, itemStack);
+			}
+		}
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		fr.drawStringWithShadow("999 FPS", pos.getAbsoluteX() + (50 - (fr.getStringWidth("999 FPS"))) / 2,
+				pos.getAbsoluteY() + 3, -1);
+	}
+
+}

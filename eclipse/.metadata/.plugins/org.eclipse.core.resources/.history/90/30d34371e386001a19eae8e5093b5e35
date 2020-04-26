@@ -1,0 +1,43 @@
+package caterpillow.Module.Debug;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Client.Client;
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.Module.HUD.ScreenPosition;
+import net.minecraft.client.gui.ScaledResolution;
+
+public class Debugger extends Module {
+
+	public Debugger() {
+		super("Debugger", Keyboard.KEY_Y, Category.DEBUG);
+	}
+
+	@Override
+	public void setup() {
+
+		ScaledResolution sr = new ScaledResolution(mc);
+
+		pos = ScreenPosition.fromAbsolute(0, sr.getScaledHeight() - fr.FONT_HEIGHT - 5);
+		width = 50;
+		height = fr.FONT_HEIGHT + 5;
+
+	}
+
+	@Override
+	public void onEnable() {
+
+		System.out.println(Client.instance.moduleManager.getModulesByName("KeyStrokes").getPos().getAbsoluteX() + " : "
+				+ Client.instance.moduleManager.getModulesByName("KeyStrokes").getPos().getAbsoluteY());
+
+		toggle();
+
+	}
+
+	@Override
+	public void renderDummy(ScreenPosition pos) {
+		fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 2, -1);
+	}
+
+}

@@ -1,0 +1,28 @@
+package caterpillow.Module.HUD;
+
+import org.lwjgl.input.Keyboard;
+
+import caterpillow.Module.Category;
+import caterpillow.Module.Module;
+import caterpillow.event.EventTarget;
+import caterpillow.event.events.Event2D;
+
+public class TestText extends Module {
+
+	public TestText() {
+		super("TestText", Keyboard.KEY_NONE, Category.HUD, null, 10, 50);
+	}
+
+
+
+	@EventTarget
+	public void onEvent2D(Event2D event) {
+		fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, -1);
+	}
+
+	@Override
+	public void renderDummy() {
+		fr.drawStringWithShadow("test text", pos.getAbsoluteX() + 1, pos.getAbsoluteY() + 1, -1);
+	}
+
+}
