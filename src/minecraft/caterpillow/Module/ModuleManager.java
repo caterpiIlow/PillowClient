@@ -29,18 +29,23 @@ public class ModuleManager {
 
 		defaults.add("Fullbright");
 		defaults.add("HUD");
+			//CHEATS
 //		defaults.add("FastPlace");
+			//CHEATS
 		defaults.add("TestText");
 
 		// COMBAT
+			//CHEATS
 //		modules.add(new KillAura());
 //		modules.add(new AntiBot());
 //		modules.add(new AutoArmour());
 //		modules.add(new Criticals());
 //		modules.add(new Velocity());
+			//CHEATS
 
 		// MOVEMENT
 		modules.add(new Sprint());
+			//CHEATS
 //		modules.add(new Fly());
 //		modules.add(new Step());
 		// modules.add(new Spider());
@@ -49,12 +54,15 @@ public class ModuleManager {
 //		modules.add(new Strafe());
 //		modules.add(new Speed());
 //		modules.add(new Scaffold());
+			//CHEATS
 
 		// PLAYER
+			//CHEATS
 //		modules.add(new NoFall());
 //		modules.add(new FastPlace());
 //		modules.add(new NoClip());
 //		modules.add(new InvMove());
+			//CHEATS
 
 		// modules.add(new NoSlowDown());
 
@@ -80,6 +88,7 @@ public class ModuleManager {
 		modules.add(new Armour());
 		modules.add(new CPS());
 		// SPECIFIC
+			//for pundapillow
 		modules.add(new MouseSwap());
 
 		// DEBUG
