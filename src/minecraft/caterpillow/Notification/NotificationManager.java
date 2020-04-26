@@ -3,7 +3,9 @@ package caterpillow.Notification;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 //create instance in Client.java for this to work
-//to use 
+//to use do Client.instance.notificationManager.show(NotificationType.(NOTIF TYPE), "Title", "text", time (seconds);
+//run Client.instance.notificationManager.notificationUpdate(); in GuiIngame.java
+//u should be able to find it
 
 public class NotificationManager {
 	private static CopyOnWriteArrayList<Notification> pendingNotifications = new CopyOnWriteArrayList<Notification>();
