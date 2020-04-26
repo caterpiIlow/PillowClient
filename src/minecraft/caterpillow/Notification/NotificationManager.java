@@ -2,6 +2,9 @@ package caterpillow.Notification;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+//create instance in Client.java for this to work
+//to use 
+
 public class NotificationManager {
 	private static CopyOnWriteArrayList<Notification> pendingNotifications = new CopyOnWriteArrayList<Notification>();
 	private static Notification currentNotification = null;
